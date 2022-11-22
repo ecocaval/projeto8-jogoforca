@@ -9,12 +9,12 @@ export default function App() {
   const [letterState, setletterState] = useState("disabled");
   const [usrGuessBtState, setUsrGuessBtState] = useState(true);
   const [numberOfErrors, setNumberOfErrors] = useState(0);
-  const [gameWord, setGameWord] = useState("_ _ _ _ _ _ _ _ _ _");
+  const [gameWord, setGameWord] = useState("");
 
   function startGame() {
       setletterState("")
       setUsrGuessBtState(false)
-      setGameWord(sortWords(words,0))
+      setGameWord(sortWords(words,0).sortedWordHidden)
   }
 
   function sortWords(words, sortCounter) {
@@ -25,23 +25,27 @@ export default function App() {
     let shuffledWordsIndexes = [];
     let shuffledWords = [];
 
-    for(let counter in originalWords){
-      originalWordsIndexes.push(counter);
-    }
+    originalWords.forEach((_,index) => {
+      originalWordsIndexes.push(index);
+    })
 
     shuffledWordsIndexes = originalWordsIndexes.sort((a,b) => {
         return 0.5 - Math.random();
     })
 
-    for(let counter in originalWords){
-      shuffledWords.push(originalWords[shuffledWordsIndexes[counter]])
-    }    
+    originalWords.forEach((_,index) => {
+      shuffledWords.push(originalWords[shuffledWordsIndexes[index]])
+    })
 
     if(sortCounter < ((words.length>100)?100:words.length)) {
       sortWords(words,sortCounter+1);
     }
-    
-    return shuffledWords[0];
+
+    // returns the original word and it's sorted version
+    return ({
+      sortedWord: shuffledWords[0],
+      sortedWordHidden: shuffledWords[0].replace(/./g, '_ ')
+    }) ;
   }
 
   return (
