@@ -50,6 +50,10 @@ body {
     border-radius: 8px;
 }
 
+.game .choose-word-button:hover{
+    cursor: pointer;
+}
+
 .game .choose-word-button > p {
     color: #FFFFFF;
     font-weight: 700;
@@ -76,7 +80,6 @@ body {
     display: grid;
     grid-template-rows: repeat(2, auto);
     grid-auto-flow: column;
-    margin: 20px;
 }
 
 .letters > section > button {
@@ -125,6 +128,10 @@ body {
     background: #E1ECF4;
     border: 1px solid #7AA7C7;
     border-radius: 3px;
+}
+
+.user-guess > button:hover{
+    cursor: pointer;
 }
 
 .user-guess > button > p {

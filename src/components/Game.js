@@ -1,6 +1,10 @@
 import HangMan from './HangMan'
+import {useState} from 'react'
 
-export default function Game() {
+export default function Game(props) {
+
+    const [gameWord, setGameWord] = useState("_ _ _ _ _ _ _ _ _ _");
+
     return (
         <>
             <main className="game">
@@ -8,12 +12,12 @@ export default function Game() {
                 <HangMan/>
                 
                 <aside>
-                    <button className="choose-word-button">
+                    <button className="choose-word-button" onClick={props.startGame}>
                         <p>
                             Escolher Palavra
                         </p>
                     </button>
-                    <p className="game-word">_ _ _ _ _ _ _ _ _ _</p>
+                    <p className="game-word">{gameWord}</p>
                 </aside>
             </main>
         </>
