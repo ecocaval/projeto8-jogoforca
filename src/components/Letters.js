@@ -1,6 +1,7 @@
 import LetterButton from "./LetterButton"
 
 export default function Letters(props) {
+    const {letterState, gameWord, gameWordHidden, setGameWordHidden} = props;
     const alphabet = ["A","B","C","D","E","F","G","H","I","J",
                       "K","L","M","N","O","P","Q","R","S","T",
                       "U","V","W","X","Y","Z"];                   
@@ -9,7 +10,9 @@ export default function Letters(props) {
             <section>
                 {alphabet.map((letter) => {
                     return(
-                        <LetterButton letter={letter} letterState={props.letterState}/>
+                        <LetterButton key={letter} letter={letter} letterState={letterState}
+                                      gameWord={gameWord} gameWordHidden={gameWordHidden}
+                                      setGameWordHidden={setGameWordHidden}/>
                     );
                 })}
             </section>
