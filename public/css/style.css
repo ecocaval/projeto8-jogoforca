@@ -11,27 +11,28 @@
 body {
     /* background-color: rgba(0, 0, 255, 0.349); */
     font-family: 'Roboto';
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .game {
     display: flex;
     justify-content: space-between;
     /* background-color: red; */
-    height: 62vh;
+    height: 60vh;
     padding: 30px 50px;
 }
 
 .game > .hangman {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     /* background-color: purple; */
     height: auto;
 }
 
 .game > .hangman > img {
     width: 400px;
-    height: 470px;
 }
 
 .game > aside {
@@ -73,7 +74,7 @@ body {
     justify-content: center;
     align-items: flex-end;
     /* background-color: green; */
-    height: 19vh;
+    height: 20vh;
 }
 
 .letters > section {
@@ -103,7 +104,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 19vh;
+    height: 20vh;
 }
 
 .user-guess p {
