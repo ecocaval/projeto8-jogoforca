@@ -1,14 +1,14 @@
-import GameDisplay from './components/GameDisplay'
-import GameKeyboard from './components/GameKeyboard'
-import GameUserGuess from './components/GameUserGuess'
+import Game from './components/Game'
+import Letters from './components/Letters'
+import UserGuess from './components/UserGuess'
 
 export default function App() {
   return (
     <>
       <main>
-        <GameDisplay/>
-        <GameKeyboard/>
-        <GameUserGuess/>
+        <Game/>
+        <Letters/>
+        <UserGuess/>
       </main>
     </>
   );
