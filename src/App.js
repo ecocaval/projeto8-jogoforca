@@ -55,10 +55,14 @@ export default function App() {
                 gameIsOver={gameIsOver}
         />
         <Chute usrGuessBtState={usrGuessBtState}
+               setUsrGuessBtState={setUsrGuessBtState}
+               setGameWord={setGameWord}
                gameWord={gameWord}
                setGameWordHidden={setGameWordHidden}
                gameWordHidden={gameWordHidden}
                setGameIsOver={setGameIsOver}
+               setHangManImg={setHangManImg}
+               finalHangMan={hangManImgErrors[hangManImgErrors.length-1]}
         />
       </main>
     </>

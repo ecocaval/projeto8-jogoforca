@@ -1,9 +1,9 @@
-export default function Chute({usrGuessBtState, gameWord, setGameWordHidden, gameWordHidden, setGameIsOver}) {
+export default function Chute({usrGuessBtState, setUsrGuessBtState, setGameWord, gameWord, setGameWordHidden, gameWordHidden, setGameIsOver, setHangManImg, finalHangMan}) {
 
     function testGuess(event) {
         const footerDiv = event.currentTarget.parentElement
         const userGuess = footerDiv.childNodes[1].value
-        return (userGuess===gameWord)?(rightGuess()):(wrongGuess())
+        return (userGuess===gameWord)?(rightGuess()):(wrongGuess(footerDiv))
     }
 
     function rightGuess() {
@@ -11,7 +11,7 @@ export default function Chute({usrGuessBtState, gameWord, setGameWordHidden, gam
         const gameWordArr = Array.from(gameWord)
 
         gameWordHidden = (Array.from(gameWordHidden)).map((char) => {
-            if (char!==" ") {
+            if(char!==" ") {
                 gameWordCounter++
                 return gameWordArr[gameWordCounter]
             } 
@@ -20,8 +20,13 @@ export default function Chute({usrGuessBtState, gameWord, setGameWordHidden, gam
         setGameWordHidden(gameWordHidden.toString().replaceAll(',',''))     
     }
 
-    function wrongGuess() {
-        setGameIsOver(true);
+    function wrongGuess(footerDiv) {
+        setGameIsOver(true)
+        setUsrGuessBtState(true)
+        setGameWordHidden('')
+        setGameWord('')
+        setHangManImg(finalHangMan)
+        footerDiv.childNodes[1].value = ''        
     }
 
     return (

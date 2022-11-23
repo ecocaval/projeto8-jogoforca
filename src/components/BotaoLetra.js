@@ -11,13 +11,12 @@ export default function BotaoLetra({letter, letterState, gameWord, gameWordHidde
 
     function lookForLetterInWord(wordToUpdate, letter) {
         return wordToUpdate.map((wordLetter) => {
-            return((wordLetter!==letter.toLowerCase() && wordLetter!==' ')?'_':wordLetter)
+            return((wordLetter !== letter.toLowerCase() && wordLetter !== ' ') ? '_' : wordLetter)
         })
     }
 
     function checkGuess() {
         const guessIsRight = Array.from(gameWord).includes(letter.toLowerCase());
-
         if(guessIsRight) {
             let wordToUpdate = Array.from(gameWord.replaceAll('',' '))
             let currentWordDisplay = Array.from(gameWordHidden)
@@ -37,15 +36,16 @@ export default function BotaoLetra({letter, letterState, gameWord, gameWordHidde
         }
     }
 
+    // updates the hangman image
     useEffect(() => {
-        setHangManImg(hangManImgErrors[numberOfErrors]) // GAMBIARRA, CHECAR DPS PQ NAO ATUALIZA AQUI NA HORA
+        setHangManImg(hangManImgErrors[numberOfErrors]) 
     },[numberOfErrors])
 
     return(
         <button key={letter} 
                 className={(letterState) + (buttonIsDisabled ? "desativado" : "") + (gameIsOver ? "desativado" : "")} 
                 onClick={() => {
-                    if(!gameHasStarted) {
+                    if(!gameHasStarted || gameIsOver) {
                         return
                     }
                     setButtonIsDisabled(true)
