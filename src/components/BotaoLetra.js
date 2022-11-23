@@ -1,13 +1,7 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 
-export default function BotaoLetra(props) {
-
-    const {letter, letterState, gameWord, gameWordHidden, setGameWordHidden, gameHasStarted} = props;
+export default function BotaoLetra({letter, letterState, gameWord, gameWordHidden, setGameWordHidden, gameHasStarted, numberOfErrors, setNumberOfErrors, setHangManImg, hangManImgErrors, gameIsOver}) {
     const [buttonIsDisabled, setButtonIsDisabled] = useState(false); 
-
-    function disableButton() {
-        setButtonIsDisabled(true)
-    }    
 
     function removeFirstAndLastSpaces(arr) {
         arr.pop()
@@ -27,27 +21,34 @@ export default function BotaoLetra(props) {
         if(guessIsRight) {
             let wordToUpdate = Array.from(gameWord.replaceAll('',' '))
             let currentWordDisplay = Array.from(gameWordHidden)
-            console.log(gameWordHidden);
 
             removeFirstAndLastSpaces(wordToUpdate)
             
             wordToUpdate = lookForLetterInWord(wordToUpdate,letter)
 
             currentWordDisplay = currentWordDisplay.map((currentWordLetter,index) => {
-                return (((currentWordLetter===wordToUpdate[index])||(wordToUpdate[index]==="_" && currentWordLetter!=='_'))?currentWordLetter:wordToUpdate[index])
+                return (((currentWordLetter === wordToUpdate[index]) ||
+                         (wordToUpdate[index] === "_" && currentWordLetter !== '_'))
+                         ? currentWordLetter : wordToUpdate[index])
             })
             setGameWordHidden(currentWordDisplay.toString().replaceAll(',',''));            
+        } else {
+            setNumberOfErrors(numberOfErrors+1);
         }
     }
 
+    useEffect(() => {
+        setHangManImg(hangManImgErrors[numberOfErrors]) // GAMBIARRA, CHECAR DPS PQ NAO ATUALIZA AQUI NA HORA
+    },[numberOfErrors])
+
     return(
         <button key={letter} 
-                className={(letterState) + (buttonIsDisabled ? "desativado" : "")} 
+                className={(letterState) + (buttonIsDisabled ? "desativado" : "") + (gameIsOver ? "desativado" : "")} 
                 onClick={() => {
                     if(!gameHasStarted) {
                         return
                     }
-                    disableButton() 
+                    setButtonIsDisabled(true)
                     checkGuess()
                 }}
         >

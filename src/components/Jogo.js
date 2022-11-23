@@ -1,11 +1,10 @@
 import Forca from './Forca'
 
-export default function Jogo(props) {
-    const {startGame, gameWord} = props;
+export default function Jogo({startGame, gameWord, hangManImg}) {
     return (
         <>
             <main className="jogo">
-                <Forca/>                
+                <Forca hangManImg={hangManImg}/>                
                 <aside>
                     <button className="bota-escolha-palavra" onClick={startGame}>
                         <p>

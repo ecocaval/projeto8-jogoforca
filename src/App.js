@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import Jogo from './components/Jogo'
 import Letras from './components/Letras'
 import Chute from './components/Chute'
@@ -7,34 +7,59 @@ import sortWords from './words/sortWords'
 
 export default function App() {
 
-  const [letterState, setletterState] = useState("desativado");
-  const [usrGuessBtState, setUsrGuessBtState] = useState(true);
-  const [gameWordHidden, setGameWordHidden] = useState("");
-  const [numberOfErrors, setNumberOfErrors] = useState(0);
-  const [gameWord, setGameWord] = useState('');
-  const [gameHasStarted, setGameHasStarted] = useState(false);
+  const hangManImgErrors = [
+    "assets/imgs/forca0.png",
+    "assets/imgs/forca1.png",
+    "assets/imgs/forca2.png",
+    "assets/imgs/forca3.png",
+    "assets/imgs/forca4.png",
+    "assets/imgs/forca5.png",
+    "assets/imgs/forca6.png"
+  ] 
+
+  const [letterState, setletterState] = useState("desativado")
+  const [usrGuessBtState, setUsrGuessBtState] = useState(true)
+  const [gameWordHidden, setGameWordHidden] = useState("")
+  const [gameWord, setGameWord] = useState('')
+  const [gameHasStarted, setGameHasStarted] = useState(false)
+  const [gameIsOver, setGameIsOver] = useState(false)
+  const [numberOfErrors, setNumberOfErrors] = useState(0)
+  const [hangManImg, setHangManImg] = useState(hangManImgErrors[0])
 
   function startGame() {
-      const {sortedWord, sortedWordHidden} = sortWords(words,0)
-      console.log(sortedWord);
+      const {sortedWord,sortedWordHidden} = sortWords(words,0)
+      console.log(sortedWord)
       setletterState("")
       setUsrGuessBtState(false)
-      setGameWord(sortedWord);
+      setGameWord(sortedWord)
       setGameWordHidden(sortedWordHidden)
-      setGameHasStarted(true);
+      setGameHasStarted(true)
   }
 
   return (
     <>
       <main>
-        <Jogo startGame={startGame} gameWord={gameWordHidden}/>
+        <Jogo startGame={startGame} 
+              gameWord={gameWordHidden}
+              hangManImg={hangManImg}
+        />
         <Letras letterState={letterState} 
                 gameWord={gameWord} 
                 gameWordHidden={gameWordHidden} 
-                setGameWordHidden={setGameWordHidden}
+                setGameWordHidden={setGameWordHidden} 
                 gameHasStarted={gameHasStarted}
+                numberOfErrors={numberOfErrors}
+                setNumberOfErrors={setNumberOfErrors}
+                setHangManImg={setHangManImg}
+                hangManImgErrors={hangManImgErrors}
+                gameIsOver={gameIsOver}
         />
-        <Chute usrGuessBtState={usrGuessBtState}/>
+        <Chute usrGuessBtState={usrGuessBtState}
+               gameWord={gameWord}
+               setGameWordHidden={setGameWordHidden}
+               gameWordHidden={gameWordHidden}
+               setGameIsOver={setGameIsOver}
+        />
       </main>
     </>
   );
