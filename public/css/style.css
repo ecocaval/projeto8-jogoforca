@@ -15,35 +15,35 @@ body {
     margin: 0 auto;
 }
 
-.game {
+.jogo {
+    /* background-color: red; */
     display: flex;
     justify-content: space-between;
-    /* background-color: red; */
     height: 60vh;
     padding: 30px 50px;
 }
 
-.game > .hangman {
+.jogo > .forca {
+    /* background-color: purple; */
     display: flex;
     justify-content: center;
     align-items: stretch;
-    /* background-color: purple; */
     height: auto;
 }
 
-.game > .hangman > img {
+.jogo > .forca > img {
     width: 400px;
 }
 
-.game > aside {
+.jogo > aside {
+    /* background-color: pink; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    /* background-color: pink; */
 }
 
-.game .choose-word-button{
+.jogo .bota-escolha-palavra{
     background-color: #27AE60;
     width: 200px;
     height: 60px;
@@ -51,39 +51,43 @@ body {
     border-radius: 8px;
 }
 
-.game .choose-word-button:hover{
+.jogo .bota-escolha-palavra:active{
+    background-color: #176437;
+}
+
+.jogo .bota-escolha-palavra:hover{
     cursor: pointer;
 }
 
-.game .choose-word-button > p {
+.jogo .bota-escolha-palavra > p {
     color: #FFFFFF;
     font-weight: 700;
     font-size: 20px;
 }
 
-.game .game-word {
-    color: #000000;
+.jogo .palavra-jogo {
     font-family: 'Noto Sans';
+    color: #000000;
     font-style: normal;
     font-weight: 700;
     font-size: 50px;
 }
 
-.letters {
+.letras {
+    /* background-color: green; */
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    /* background-color: green; */
     height: 20vh;
 }
 
-.letters > section {
+.letras > section {
     display: grid;
     grid-template-rows: repeat(2, auto);
     grid-auto-flow: column;
 }
 
-.letters > section > button {
+.letras > section > button {
     width: 40px;
     height: 40px;
     font-weight: 700;
@@ -95,25 +99,25 @@ body {
     margin: 5px 5px;
 }
 
-.disabled {
+.desativado {
     background: #798A9F !important;
     color: #6b7075 !important;
 }
 
-.user-guess {
+.chute-usuario {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 20vh;
 }
 
-.user-guess p {
+.chute-usuario p {
     font-weight: 400;
     font-size: 20px;
     color: #000000;
 }
 
-.user-guess > input {
+.chute-usuario > input {
     width: 353px;
     height: 40px;
     background: #FFFFFF;
@@ -123,7 +127,7 @@ body {
     margin: 0 12px;
 }
 
-.user-guess > button {
+.chute-usuario > button {
     width: 100px;
     height: 40px;
     background: #E1ECF4;
@@ -131,11 +135,11 @@ body {
     border-radius: 3px;
 }
 
-.user-guess > button:hover{
+.chute-usuario > button:hover{
     cursor: pointer;
 }
 
-.user-guess > button > p {
+.chute-usuario > button > p {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;

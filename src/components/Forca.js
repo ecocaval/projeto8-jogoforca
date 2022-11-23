@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState} from 'react';
 
-export default function HangMan() {    
+export default function Forca() {    
 
     const hangManImgErrors = [
         "assets/imgs/forca0.png",
@@ -17,7 +17,7 @@ export default function HangMan() {
 
     return (
         <>
-            <figure className='hangman'>
+            <figure className='forca'>
                 <img src={hangManImg}/>
             </figure>
         </>

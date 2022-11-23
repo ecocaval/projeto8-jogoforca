@@ -1,9 +1,8 @@
 import {useState} from 'react'
 
-export default function LetterButton(props) {
+export default function BotaoLetra(props) {
 
-    const {letter, letterState, gameWord, gameWordHidden, setGameWordHidden} = props;
-
+    const {letter, letterState, gameWord, gameWordHidden, setGameWordHidden, gameHasStarted} = props;
     const [buttonIsDisabled, setButtonIsDisabled] = useState(false); 
 
     function disableButton() {
@@ -43,8 +42,11 @@ export default function LetterButton(props) {
 
     return(
         <button key={letter} 
-                className={(letterState) + (buttonIsDisabled ? "disabled" : "")} 
+                className={(letterState) + (buttonIsDisabled ? "desativado" : "")} 
                 onClick={() => {
+                    if(!gameHasStarted) {
+                        return
+                    }
                     disableButton() 
                     checkGuess()
                 }}
