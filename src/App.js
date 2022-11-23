@@ -25,6 +25,7 @@ export default function App() {
   const [gameIsOver, setGameIsOver] = useState(false)
   const [numberOfErrors, setNumberOfErrors] = useState(0)
   const [hangManImg, setHangManImg] = useState(hangManImgErrors[0])
+  const [userWonGame, setUserWonGame] = useState(false) 
 
   function startGame() {
       const {sortedWord,sortedWordHidden} = sortWords(words,0)
@@ -34,6 +35,9 @@ export default function App() {
       setGameWord(sortedWord)
       setGameWordHidden(sortedWordHidden)
       setGameHasStarted(true)
+      setGameIsOver(false)
+      setUserWonGame(false)
+      setNumberOfErrors(0)
   }
 
   return (
@@ -53,6 +57,7 @@ export default function App() {
                 setHangManImg={setHangManImg}
                 hangManImgErrors={hangManImgErrors}
                 gameIsOver={gameIsOver}
+                userWonGame={userWonGame}
         />
         <Chute usrGuessBtState={usrGuessBtState}
                setUsrGuessBtState={setUsrGuessBtState}
@@ -63,6 +68,7 @@ export default function App() {
                setGameIsOver={setGameIsOver}
                setHangManImg={setHangManImg}
                finalHangMan={hangManImgErrors[hangManImgErrors.length-1]}
+               setUserWonGame={setUserWonGame}
         />
       </main>
     </>

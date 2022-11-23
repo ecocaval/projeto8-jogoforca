@@ -1,6 +1,6 @@
 import BotaoLetra from "./BotaoLetra"
 
-export default function Letras({letterState, gameWord, gameWordHidden, setGameWordHidden, gameHasStarted, numberOfErrors, setNumberOfErrors, setHangManImg, hangManImgErrors, gameIsOver}) {
+export default function Letras({letterState, gameWord, gameWordHidden, setGameWordHidden, gameHasStarted, numberOfErrors, setNumberOfErrors, setHangManImg, hangManImgErrors, gameIsOver, userWonGame}) {
     const alphabet = ["A","B","C","D","E","F","G","H","I","J",
                       "K","L","M","N","O","P","Q","R","S","T",
                       "U","V","W","X","Y","Z"];                   
@@ -21,6 +21,7 @@ export default function Letras({letterState, gameWord, gameWordHidden, setGameWo
                                     setHangManImg={setHangManImg}
                                     hangManImgErrors={hangManImgErrors}
                                     gameIsOver={gameIsOver}
+                                    userWonGame={userWonGame}
                         />
                     );
                 })}

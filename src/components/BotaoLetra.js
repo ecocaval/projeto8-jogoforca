@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 
-export default function BotaoLetra({letter, letterState, gameWord, gameWordHidden, setGameWordHidden, gameHasStarted, numberOfErrors, setNumberOfErrors, setHangManImg, hangManImgErrors, gameIsOver}) {
+export default function BotaoLetra({letter, letterState, gameWord, gameWordHidden, setGameWordHidden, gameHasStarted, numberOfErrors, setNumberOfErrors, setHangManImg, hangManImgErrors, gameIsOver, userWonGame}) {
     const [buttonIsDisabled, setButtonIsDisabled] = useState(false); 
 
     function removeFirstAndLastSpaces(arr) {
@@ -39,11 +39,15 @@ export default function BotaoLetra({letter, letterState, gameWord, gameWordHidde
     // updates the hangman image
     useEffect(() => {
         setHangManImg(hangManImgErrors[numberOfErrors]) 
+        console.log(numberOfErrors);
     },[numberOfErrors])
 
     return(
         <button key={letter} 
-                className={(letterState) + (buttonIsDisabled ? "desativado" : "") + (gameIsOver ? "desativado" : "")} 
+                className={(letterState) + 
+                           (buttonIsDisabled ? "desativado" : "") + 
+                           (gameIsOver ? "desativado" : "") + 
+                           (userWonGame ? "desativado" : "")} 
                 onClick={() => {
                     if(!gameHasStarted || gameIsOver) {
                         return
