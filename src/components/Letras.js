@@ -1,6 +1,6 @@
 import BotaoLetra from "./BotaoLetra"
 
-export default function Letras({letterState, gameWord, gameWordHidden, setGameWordHidden, gameHasStarted, numberOfErrors, setNumberOfErrors, setHangManImg, hangManImgErrors, gameIsOver, userWonGame}) {
+export default function Letras({gameWord, gameWordHidden, setGameWordHidden, gameHasStarted, numberOfErrors, setNumberOfErrors, setHangManImg, hangManImgErrors, gameIsOver, userWonGame}) {
     const alphabet = ["A","B","C","D","E","F","G","H","I","J",
                       "K","L","M","N","O","P","Q","R","S","T",
                       "U","V","W","X","Y","Z"];                   
@@ -11,7 +11,6 @@ export default function Letras({letterState, gameWord, gameWordHidden, setGameWo
                     return(
                         <BotaoLetra key={letter} 
                                     letter={letter} 
-                                    letterState={letterState}
                                     gameWord={gameWord} 
                                     gameWordHidden={gameWordHidden}
                                     setGameWordHidden={setGameWordHidden}

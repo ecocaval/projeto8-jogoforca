@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 
-export default function BotaoLetra({letter, letterState, gameWord, gameWordHidden, setGameWordHidden, gameHasStarted, numberOfErrors, setNumberOfErrors, setHangManImg, hangManImgErrors, gameIsOver, userWonGame}) {
+export default function BotaoLetra({letter, gameWord, gameWordHidden, setGameWordHidden, gameHasStarted, numberOfErrors, setNumberOfErrors, setHangManImg, hangManImgErrors, gameIsOver, userWonGame}) {
     const [buttonIsDisabled, setButtonIsDisabled] = useState(false); 
 
     function removeFirstAndLastSpaces(arr) {
@@ -32,24 +32,27 @@ export default function BotaoLetra({letter, letterState, gameWord, gameWordHidde
             })
             setGameWordHidden(currentWordDisplay.toString().replaceAll(',',''));            
         } else {
-            setNumberOfErrors(numberOfErrors+1);
+            const incrementedNumberOfErrors = numberOfErrors+1;
+            setNumberOfErrors(incrementedNumberOfErrors);
+            setHangManImg(hangManImgErrors[incrementedNumberOfErrors]) 
         }
     }
 
-    // updates the hangman image
+    // disables button if game is over
     useEffect(() => {
-        setHangManImg(hangManImgErrors[numberOfErrors]) 
-        console.log(numberOfErrors);
-    },[numberOfErrors])
+        if(gameIsOver) {
+            setButtonIsDisabled(false)
+        } 
+    }, [gameIsOver])
 
     return(
         <button key={letter} 
-                className={(letterState) + 
-                           (buttonIsDisabled ? "desativado" : "") + 
-                           (gameIsOver ? "desativado" : "") + 
-                           (userWonGame ? "desativado" : "")} 
+                className={(gameHasStarted ? "" : "desativado ") +
+                           (buttonIsDisabled ? "desativado " : "") + 
+                           (gameIsOver ? "desativado " : "") + 
+                           (userWonGame ? "desativado " : "")} 
                 onClick={() => {
-                    if(!gameHasStarted || gameIsOver) {
+                    if(!gameHasStarted || gameIsOver || userWonGame) {
                         return
                     }
                     setButtonIsDisabled(true)

@@ -17,7 +17,6 @@ export default function App() {
     "assets/imgs/forca6.png"
   ] 
 
-  const [letterState, setletterState] = useState("desativado")
   const [usrGuessBtState, setUsrGuessBtState] = useState(true)
   const [gameWordHidden, setGameWordHidden] = useState("")
   const [gameWord, setGameWord] = useState('')
@@ -30,7 +29,6 @@ export default function App() {
   function startGame() {
       const {sortedWord,sortedWordHidden} = sortWords(words,0)
       console.log(sortedWord)
-      setletterState("")
       setUsrGuessBtState(false)
       setGameWord(sortedWord)
       setGameWordHidden(sortedWordHidden)
@@ -38,6 +36,7 @@ export default function App() {
       setGameIsOver(false)
       setUserWonGame(false)
       setNumberOfErrors(0)
+      setHangManImg(hangManImgErrors[0])
   }
 
   return (
@@ -47,8 +46,7 @@ export default function App() {
               gameWord={gameWordHidden}
               hangManImg={hangManImg}
         />
-        <Letras letterState={letterState} 
-                gameWord={gameWord} 
+        <Letras gameWord={gameWord} 
                 gameWordHidden={gameWordHidden} 
                 setGameWordHidden={setGameWordHidden} 
                 gameHasStarted={gameHasStarted}
@@ -69,6 +67,7 @@ export default function App() {
                setHangManImg={setHangManImg}
                finalHangMan={hangManImgErrors[hangManImgErrors.length-1]}
                setUserWonGame={setUserWonGame}
+               setGameHasStarted={setGameHasStarted}
         />
       </main>
     </>

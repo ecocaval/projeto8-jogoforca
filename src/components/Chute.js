@@ -1,12 +1,14 @@
-export default function Chute({usrGuessBtState, setUsrGuessBtState, setGameWord, gameWord, setGameWordHidden, gameWordHidden, setGameIsOver, setHangManImg, finalHangMan, setUserWonGame}) {
+export default function Chute({usrGuessBtState, setUsrGuessBtState, setGameWord, gameWord, setGameWordHidden, gameWordHidden, setGameIsOver, setHangManImg, finalHangMan, setUserWonGame, setGameHasStarted}) {
 
     function testGuess(event) {
-        const footerDiv = event.currentTarget.parentElement
-        const userGuess = footerDiv.childNodes[1].value
-        return (userGuess===gameWord)?(rightGuess(footerDiv)):(wrongGuess(footerDiv))
+        const userGuessInput = event.currentTarget.parentElement.childNodes[1]
+        const userGuess = userGuessInput.value
+        console.log('test');
+        console.log(userGuess===gameWord);
+        return (userGuess===gameWord)?(rightGuess(userGuessInput)):(wrongGuess(userGuessInput))
     }
 
-    function rightGuess(footerDiv) {
+    function rightGuess(userGuessInput) {
         let gameWordCounter = -1
         const gameWordArr = Array.from(gameWord)
 
@@ -18,18 +20,29 @@ export default function Chute({usrGuessBtState, setUsrGuessBtState, setGameWord,
             return char
         })   
         setGameWordHidden(gameWordHidden.toString().replaceAll(',',''))     
-        setUserWonGame(true)
         setUsrGuessBtState(true)
-        footerDiv.childNodes[1].value = ''  
+        userGuessInput.value = ''
+        checkIfGameIsOver();  
     }
 
-    function wrongGuess(footerDiv) {
+    function wrongGuess(userGuessInput) {
+        setGameHasStarted(false)
         setGameIsOver(true)
         setUsrGuessBtState(true)
         setGameWordHidden('')
         setGameWord('')
         setHangManImg(finalHangMan)
-        footerDiv.childNodes[1].value = ''        
+        userGuessInput.value = ''        
+    }
+
+    function checkIfGameIsOver() {
+        if(!(Array.from(gameWordHidden).includes('_'))) {
+            setGameHasStarted(false)
+            setGameIsOver(true)
+            setUsrGuessBtState(true)
+            setUserWonGame(true)
+            console.log('game is over');
+        }
     }
 
     return (
